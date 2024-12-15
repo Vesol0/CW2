@@ -18,8 +18,8 @@ pipeline {
             steps {
                 echo 'Testing Docker Image...'
                 sh '''
-                    docker image inspect christieseery25/cw2-server:1.0
-                    docker run --name test-container -p 8081:8080 -d christieseery25/cw2-server:1.0
+                    docker image inspect christieseery25/cw2-server
+                    docker run --name test-container -p 8081:8080 -d christieseery25/cw2-server
                     docker ps
                     docker stop test-container
                     docker rm test-container
@@ -35,7 +35,7 @@ pipeline {
 
         stage('DockerHub Image Push') {
             steps {
-                sh 'docker push christieseery25/cw2-server:1.0'
+                sh 'docker push christieseery25/cw2-server'
             }
         }
 
@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sshagent(['jenkins-k8s-ssh-key']) {
                     echo 'Updating the deployment with the new image'
-                    sh 'kubectl set image deployments/kubernetes-task2 kubernetes-task2=christieseery25/cw2-server:latest'
+                    sh 'kubectl create deployment kubernetes-task2 --image=christieseery25/cw2-server:latest'
                     sh 'kubectl rollout status deployments/kubernetes-task2'
                    
                 }
