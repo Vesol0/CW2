@@ -3,7 +3,7 @@ pipeline {
     agent any
     environment {
         DOCKERHUB_CREDS = credentials('dockerhub')
-	KUBECONFIG = credentials('kubeconfig-id')
+	
     }
 
     stages {
