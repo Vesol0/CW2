@@ -5,6 +5,8 @@ WORKDIR /app
 COPY package.json package.json
 COPY package-lock.json package-lock.json
 
+EXPOSE 80 443
+
 RUN npm install
 
 COPY . .
