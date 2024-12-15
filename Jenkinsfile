@@ -35,6 +35,7 @@ pipeline {
 
         stage('DockerHub Image Push') {
             steps {
+		echo 'Pushing image to DockerHub'
                 sh 'docker push christieseery25/cw2-server:1.0'
             }
         }
@@ -43,7 +44,7 @@ pipeline {
             steps {
                 sshagent(['jenkins-k8s-ssh-key']) {
                     echo 'Updating the deployment with the new image'
-                    sh 'kubectl create deployment kubernetes-task2 --image=christieseery25/cw2-server:latest'
+                    sh 'kubectl set image deployments/kubernetes-task2 kubernetes-task2=christieseery25/cw2-server:v2'
                     sh 'kubectl rollout status deployments/kubernetes-task2'
                    
                 }
