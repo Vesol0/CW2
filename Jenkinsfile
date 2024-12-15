@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo 'Testing Docker Image...'
                 sh '''
-                    docker image inspect christieseery25/cw2-server
+                    docker image inspect christieseery25/cw2-server:1.0
                     docker run --name test-container -p 8081:8080 -d christieseery25/cw2-server:1.0
                     docker ps
                     docker stop test-container
