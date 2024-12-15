@@ -43,7 +43,7 @@ pipeline {
             steps {
                 sshagent(['jenkins-k8s-ssh-key']) {
                     echo 'Updating the deployment with the new image'
-                    sh 'kubectl set image deployments/kubernetes-task2 kubernetes-task2=christieseery25/cw2-server:v2 && ./multiple_users.sh'
+                    sh 'kubectl set image deployments/kubernetes-task2 kubernetes-task2=christieseery25/cw2-server:v.2'
                     sh 'kubectl rollout status deployments/kubernetes-task2'
                     sh 'kubectl rollout undo deployments/kubernetes-task2'
                 }
